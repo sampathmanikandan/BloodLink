@@ -1,0 +1,171 @@
+<section id="register" class="register-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">Become a Life Saver</h2>
+          <p class="section-subtitle">Register as a blood donor and join our mission to save lives</p>
+        </div>
+
+        <div class="card registration-card">
+          <div class="card-body p-4">
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    formControlName="name"
+                    [class.is-invalid]="name?.invalid && name?.touched"
+                    placeholder="Enter your full name">
+                  <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
+                    Name is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                    [class.is-invalid]="email?.invalid && email?.touched"
+                    placeholder="your@email.com">
+                  <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+                    Valid email is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    formControlName="phone"
+                    [class.is-invalid]="phone?.invalid && phone?.touched"
+                    placeholder="+1234567890">
+                  <div class="invalid-feedback" *ngIf="phone?.invalid && phone?.touched">
+                    Phone number is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="bloodGroup" class="form-label">Blood Group <span class="text-danger">*</span></label>
+                  <select
+                    class="form-select"
+                    id="bloodGroup"
+                    formControlName="blood_group"
+                    [class.is-invalid]="blood_group?.invalid && blood_group?.touched">
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                  <div class="invalid-feedback" *ngIf="blood_group?.invalid && blood_group?.touched">
+                    Blood group is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    formControlName="city"
+                    [class.is-invalid]="city?.invalid && city?.touched"
+                    placeholder="Enter your city">
+                  <div class="invalid-feedback" *ngIf="city?.invalid && city?.touched">
+                    City is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Gender <span class="text-danger">*</span></label>
+                  <div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="male"
+                        value="Male"
+                        formControlName="gender">
+                      <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="female"
+                        value="Female"
+                        formControlName="gender">
+                      <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="other"
+                        value="Other"
+                        formControlName="gender">
+                      <label class="form-check-label" for="other">Other</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="available"
+                      formControlName="available">
+                    <label class="form-check-label" for="available">
+                      I am currently available to donate blood
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-lg px-5"
+                  [disabled]="registrationForm.invalid || isSubmitting">
+                  <span *ngIf="!isSubmitting">Register as Donor</span>
+                  <span *ngIf="isSubmitting">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Registering...
+                  </span>
+                </button>
+              </div>
+            </form>
+
+            <div *ngIf="successMessage" class="alert alert-success mt-4 fade-in" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              {{ successMessage }}
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-4 fade-in" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-triangle-fill me-2" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+              </svg>
+              {{ errorMessage }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
